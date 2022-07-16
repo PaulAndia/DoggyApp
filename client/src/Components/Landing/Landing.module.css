@@ -1,0 +1,38 @@
+/* .cover{
+    height: 100vh;
+    background-image:url("../Images/land.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; 
+    width: 100%;
+} */
+
+.cover{
+    position: relative;
+    height: 100vh;
+}
+
+.cover img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.cover button{
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    height: 40px;
+    width: 120px;
+    border-radius: 10px;
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.cover button:hover{
+    background-color: rgb(255, 208, 0);
+}

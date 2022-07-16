@@ -1,0 +1,21 @@
+.grid{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 330px);
+    padding: 5px;
+    justify-content: center;
+    
+}
+
+.cards{
+    font-size: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(255, 255, 255);
+    margin: 12px;
+    border-radius: 20px;
+    background-repeat: no-repeat;
+    height: 400px;
+    transition: 0.4s;
+    cursor: pointer;
+}

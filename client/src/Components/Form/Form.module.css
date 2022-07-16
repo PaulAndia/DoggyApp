@@ -1,0 +1,40 @@
+.selected{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    
+}
+
+
+.containerType{
+    position: relative;
+    display: block;
+    border-style: solid;
+    border-width: 1px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    text-align: center;
+    justify-content: baseline;
+    width: 140px;
+    height: 73%;
+    font-size: 15px;
+}
+
+
+.containerType span{
+    width: 15px;
+    height: 15px;
+    background-color: rgb(190, 35, 35);
+    float: right;
+    border-top: 0%;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.errors{
+    color: red;
+}
