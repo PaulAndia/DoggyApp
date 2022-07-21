@@ -13,8 +13,9 @@ router.post("/", async (req, res) => {
             years,
             image,
         })
-        temperaments.forEach(e => {Temperaments.findOrCreate({where: {name: e.toLowerCase()}})});
-        let tempsAddedToNewDog = await Temperaments.findAll({where: {name: temperaments}}) // --> []
+        let temperamentsToLowerCase = temperaments.map(e => e.toLowerCase())
+        temperamentsToLowerCase.forEach(e => {Temperaments.findOrCreate({where: {name: e}})});
+        let tempsAddedToNewDog = await Temperaments.findAll({where: {name: temperamentsToLowerCase}}) // --> []
         newDog.addTemperaments(tempsAddedToNewDog);
         return res.status(201).send("Dog created succesfully")
     } catch (error) {

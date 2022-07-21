@@ -41,7 +41,7 @@ const getDogsDB = async () => {
                 weight: e.weight,
                 years: e.years,
                 image: e.image,
-                temperaments: e.temperaments.map(t => t.name).join(", ")
+                temperaments: e.temperaments.map(t => t.name[0].toUpperCase() + t.name.substring(1)).join(", ")
             }
         })
         return dogsDB;
@@ -65,7 +65,6 @@ const getDogsById = async (id) => {
     try {
         const dogs = await axios.get("https://api.thedogapi.com/v1/breeds")
         const dogId = dogs.data.find(el => el.id == id); // --> {}
-        console.log(dogId)
         if(Object.keys(dogId).length > 0){
             return {
                 id: dogId.id,

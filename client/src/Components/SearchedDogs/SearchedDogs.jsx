@@ -1,11 +1,13 @@
 import { useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {getDogByName, clearDogs, getAllDogs, clearSearch } from '../../Redux/Actions';
+import {getDogByName, clearDogs, clearSearch, getTemperaments } from '../../Redux/Actions';
 import { useLocation, Link } from 'react-router-dom';
 import { CardsHome } from '../CardsHome/CardsHome';
 import { Pagination } from '../../Pagination/Pagination';
 import styles from "./SearchedDogs.module.css"
-import { Search } from '../Search/Search';
+import { Filters } from '../Filters/Filters';
+import { NavBar } from '../NavBar/NavBar';
+import { Loading } from '../Loading/Loading';
 
 export function SearchedDogs() {
      const query = new URLSearchParams(useLocation().search);
@@ -15,6 +17,7 @@ export function SearchedDogs() {
      const error = useSelector(state => state.error);
 
      useEffect(() => {
+        dispatch(getTemperaments())
         dispatch(getDogByName(name))
         return () => {
                 dispatch(clearDogs());
@@ -43,11 +46,16 @@ export function SearchedDogs() {
 
      return (
         <>
-        <Search/>
-        <div>
+        <div className={styles.head}>
+            <NavBar/>
+            <div className={styles.filt}>
+                <Filters/>
+            </div>
+        </div>
+        <div className={styles.container}>
              {error.length === 0 ?
                 (dogsName.length > 0  ? 
-                <CardsHome dogsShown={dogsShown}/> : <p>Loading...</p>): 
+                <CardsHome dogsShown={dogsShown}/> : <Loading/>): 
                     <div>
                         <p>{error}</p>
                         <Link to = "/home">
@@ -55,10 +63,10 @@ export function SearchedDogs() {
                         </Link>
                     </div>
             }
+        </div>
             <div className={styles.pagfoot}>
                 <Pagination fullDogs={dogsName} dogsPerPage={dogsPerPage} page={page} changePage={changePage}/>
             </div>
-        </div>
         </>
     )
 }

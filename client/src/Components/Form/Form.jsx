@@ -1,8 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments, postDog, deleteDog } from '../../Redux/Actions';
+import { getTemperaments, postDog} from '../../Redux/Actions';
 import styles from './Form.module.css'
+import { Modal } from '../Modal/Modal';
+import { NavBar } from '../NavBar/NavBar';
 
 export function Form() {
     const dispatch = useDispatch();
@@ -12,11 +14,12 @@ export function Form() {
         dispatch(getTemperaments())
     }, [dispatch]);
 
+    const [openModal, setOpenModal] = useState(false);
     const [disable, setDisable] = useState(true);
     const [formInput, setFormInput] = useState({
        name: "",
        image: "",
-       years: 0,
+       years: "",
        heightMin: 0,
        heightMax: 0,
        weightMin: 0,
@@ -36,7 +39,7 @@ export function Form() {
     // error alerts
     const alerts = {
         name: "Name between 5 and 30 characters",
-        image: "Insert an URL ",
+        image: "Insert a valid URL ",
         weight: "Weight is in Kilograms",
         height: "Height is in centimeters",
         years: "Years of life",
@@ -91,7 +94,6 @@ export function Form() {
         };
         console.log(formData)
         dispatch(postDog(formData))
-        alert("DOG CREATED")
         setFormInput({
             name: "",
             image: "",
@@ -135,10 +137,13 @@ export function Form() {
     
 
     return (
-        <div>
+        <>
+        <NavBar/>
+        <div className={styles.container}>
             <h1>CREATE YOUR DOG</h1>
+                <div className={styles.formContainer}>
                 <form onSubmit={handleSubmit}>
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "name" >Name: </label>
                         <input
                             id="name"
@@ -149,14 +154,14 @@ export function Form() {
                             placeholder="Dog name"
                             autoComplete='off'
                             // required
-                        />
-                        <br/>
+                            />
+                    <br/>
                 </div>
-                <div>
+                <div className={styles.errorCont}>
                     {errors.name ? <span className={styles.errors}>{errors.name}</span>: null}
                 </div>
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "image" >Image: </label>
                     <input 
                         id="image"
@@ -169,11 +174,11 @@ export function Form() {
                     />
                     <br/>
                 </div>
-                <div>
+                <div className={styles.errorCont}>
                      {errors.image ? <span className={styles.errors}>{errors.image}</span>: null}
                 </div>
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "years" >Years: </label>
                     <input 
                         id="years"
@@ -181,18 +186,18 @@ export function Form() {
                         name="years"
                         value={formInput.years}
                         onChange={handleInputChange}
-                        placeholder="Years"
+                        placeholder="Years between 1-99"
                         autoComplete='off'
                         min={1}
                         max={99}
                     />
                     <br/>
                 </div>
-                <div>
+                <div className={styles.errorCont}>
                      {errors.years ? <span className={styles.errors}>{errors.years}</span>: null}
                 </div>
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "heightMin" >Minimum Height: </label>
                     <input 
                         id="heightMin"
@@ -207,7 +212,7 @@ export function Form() {
                     <br/>
                 </div>
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "heightMax" >Maximum Height: </label>
                     <input 
                         id="heightMax"
@@ -217,13 +222,13 @@ export function Form() {
                         max={100}
                         value={formInput.heightMax}
                         onChange={handleInputChange}/>
-                    <span>{formInput.heightMax}</span>
+                    <span>{formInput.heightMax} </span>
                     <span> cm.</span>
                     <br/>
                 </div>
 
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "weightMin" >Minimum Weight: </label>
                     <input 
                         id="weightMin"
@@ -234,11 +239,11 @@ export function Form() {
                         value={formInput.weightMin}
                         onChange={handleInputChange}/>
                     <span>{formInput.weightMin}</span>
-                    <span> Kg.</span>
+                    <span>  Kg.</span>
                     <br/>
                 </div>
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "weightMax" >Maximum Weight: </label>
                     <input 
                         id="weightMax"
@@ -254,38 +259,39 @@ export function Form() {
                 </div>
 
 
-                <div>
+                <div className={styles.inputCont}>
                     <label htmlFor = "temps" >Select temperaments: </label>
-                    <select name= "temps" id="temps" onChange={ handleSelect}>
+                    <select name= "temps" id="temps" onChange={ handleSelect} className={styles.selectedTemps}>
                         {temps.map(e => 
-                            (<option value={e.name}>{e.name}</option>)
+                            (<option key = {e.id} value={e.name}>{e.name}</option>)
                             )}
                     </select>
                     <br/>
                 </div>
-                    <div>
-                    {errors.temperaments ? <span className={styles.errors}>{errors.temperaments}</span>: null}
+                    <div className={styles.errorCont}>
+                        {errors.temperaments ? <span className={styles.errors}>{errors.temperaments}</span>: null}
                     </div>
                 <div className={styles.selected}>
                     {
                             formInput.temperaments.map((t) => (
-                                <div className={styles.containerType}>
+                                <div key={t} className={styles.containerType}>
                                     <span className={styles.close} onClick={() => deleteSelectedTemp(t)}>X</span>
-                                    <p>{t}</p>
+                                    <p >{t}</p>
                                 </div>
                             )
                         )
                     }
                 </div>
                 
-                    
-                
-
-                <button type="submit" name="submit"
-                        disabled = {disable === false && Object.entries(errors).length === 0 ? false: true}>CREATE DOG  
+                <button type="submit" name="submit" onClick={() => setOpenModal(true)}
+                    disabled = {disable === false && Object.entries(errors).length === 0 ? false: true}>CREATE DOG  
                 </button>
 
                 </form>
+
+                <Modal openModal={openModal} onClose={() => setOpenModal(false)}/>
+                </div>
         </div>
+        </>
     )
 }

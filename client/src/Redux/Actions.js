@@ -8,6 +8,12 @@ export const CLEAR_DOGS = "CLEAR_DOGS";
 export const POST_DOG = "POST_DOG";
 export const GET_TEMPS = "GET_TEMPS";
 export const CLEAR_SEARCH = "CLEAR_SEARCH";
+export const  FILTER_ALPHABET = "FILTER_ALPHABET";
+export const  FILTER_WEIGHT = "FILTER_WEIGHT";
+export const  FILTER_SOURCE = "FILTER_SOURCE";
+export const  FILTER_TEMP = "DOG_TEMP";
+export const  GET_DB = "GET_DB";
+
 
 
 export const getAllDogs = () => {
@@ -89,9 +95,13 @@ export const getTemperaments = () => {
         try {
             const resTemps = await axios.get("http://localhost:3001/temperaments");
             const temps = resTemps.data;
+            const orderAsc = (x,y) => {
+                return (x.name.toLowerCase().localeCompare(y.name.toLowerCase()));
+            }
+            let tempsOrd = temps.sort(orderAsc);
             return dispatch({
                 type: GET_TEMPS,
-                payload: temps
+                payload: tempsOrd
             })
         } catch (error) {
             console.log(error);
@@ -104,3 +114,36 @@ export const clearSearch = () => {
         type: CLEAR_SEARCH,
     }
 }
+
+    
+
+//filters
+export const filterAlphabetically = (order) => {
+    return {
+        type: FILTER_ALPHABET,
+        payload: order
+    }
+}
+
+export const filterWeight = (type) => {
+    return {
+        type: FILTER_WEIGHT,
+        payload: type
+    }
+}
+
+export function filterBySource(source){
+    return {
+        type: FILTER_SOURCE,
+        payload: source
+    }
+}
+
+export function filterTemps(tempe) {
+    return async function (dispatch) {
+      return dispatch({
+        type: FILTER_TEMP,
+        payload: tempe,
+      });
+    };
+  }

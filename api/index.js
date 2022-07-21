@@ -26,15 +26,15 @@ const getDogsTemperaments = async () => {
       const info = await axios.get("https://api.thedogapi.com/v1/breeds");
       let temps = info.data.map(e => e.temperament)
       let res = temps.filter(el => el !== undefined)
-      let tempsArr = res.map(e => e.split(", ")) // --> [["aloof", "alert", ...], [], ....]
+      let tempsArr = res.map(e => e.split(", ")) // --> [["Aloof", "Alert", ...], [], ....]
       let obj = {};
       for (let i = 0; i < tempsArr.length; i++) {
-          for (let j = 0; j < tempsArr[i].length; j++) {
+        for (let j = 0; j < tempsArr[i].length; j++) {
               if(!obj[tempsArr[i][j]]){
                   obj[tempsArr[i][j]] = 1
               }else{
                   obj[tempsArr[i][j]] += 1
-              }
+                }
           }
       }
       let t = Object.keys(obj);

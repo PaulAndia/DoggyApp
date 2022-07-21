@@ -1,18 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getAllDogs, clearDogs} from '../../Redux/Actions';
+import {getAllDogs, clearDogs, getTemperaments} from '../../Redux/Actions';
 import styles from './Home.module.css'
-import { Search } from '../Search/Search';
 import { Pagination } from '../../Pagination/Pagination';
 import { CardsHome } from '../CardsHome/CardsHome';
+import { Filters } from '../Filters/Filters';
+import { NavBar } from '../NavBar/NavBar';
+import { Loading } from '../Loading/Loading';
 
 export function Home() {
     const dispatch = useDispatch();
     let fullDogs = useSelector(state => state.allDogs);
     const error = useSelector(state => state.error);
-
     
     useEffect(() => {
+        dispatch(getTemperaments())
         dispatch(getAllDogs())
         return () => {
                 dispatch(clearDogs());
@@ -25,7 +27,6 @@ export function Home() {
     const initialIndex = (page*dogsPerPage) - dogsPerPage;
     const finalIndex = page*dogsPerPage;
     const dogsShown = fullDogs.slice(initialIndex, finalIndex)
-    console.log(dogsShown)
 
     useEffect(() => {
         setPage(1)
@@ -44,11 +45,17 @@ export function Home() {
 
     return (
         <>
-        <Search/>
-        <div>
+        <div className={styles.head}>
+            <NavBar/>
+            <div className={styles.filt}>
+                <Filters/>
+            </div>
+        </div>
+        <div className={styles.container}>
+        
             { error.length === 0 ?
                 (fullDogs.length > 0  ? 
-                <CardsHome dogsShown={dogsShown}/> : <p>Loading...</p>): 
+                <CardsHome dogsShown={dogsShown}/> : <Loading/>): 
                     <div>
                         <p>{error}</p>
                         <button onClick={backHome}>GO BACK</button>

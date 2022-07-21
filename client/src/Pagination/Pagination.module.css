@@ -1,5 +1,5 @@
 .currentPage{
-    background-color: rgb(245, 223, 28);
+    background-color: rgb(28, 245, 173);
     cursor: pointer;
     border-radius: 15px;
     height: 25px;
@@ -9,15 +9,14 @@
 
 .buttonPage{
     cursor: pointer;
-    border-radius: 15px;
-    height: 25px;
-    width: 25px;
+    border-radius: 10px;
+    height: 20px;
+    width: 20px;
     border-width: 1px;  
+    font-size: 13px;
 }
 
-.next{
-    background-color: red;
-}
+
 
 .des{
     background-color: green;

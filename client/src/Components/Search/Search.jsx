@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import { useHistory, } from 'react-router-dom';
+import styles from "./Search.module.css"
+import {FaSearch} from "react-icons/fa"
 
 export function Search() {
     const [searchName, setSearchName] = useState("");
@@ -20,18 +22,18 @@ export function Search() {
     }
 
         return (
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                    type="text"
-                    value={searchName}
-                    onChange={ handleInputChange}
-                    placeholder="Search dog..."
-                    />
-                        <button type='submit'>
-                            Search
-                        </button>
-                </form>
+            <div className={styles.container}>
+                    <form onSubmit={handleSubmit} className={styles.form}>
+                            <button className={styles.btn} type='submit'>
+                                <FaSearch/>
+                            </button>
+                            <input
+                            type="text"
+                            value={searchName}
+                            onChange={ handleInputChange}
+                            placeholder="Search dog..."
+                            />
+                    </form>
             </div>
         )
 }
