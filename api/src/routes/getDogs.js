@@ -1,5 +1,5 @@
 const { Router } = require('express'); 
-const { getDogsAPI, getDogsDB, getTotalDogs, getDogsById} = require('../utils/utils');
+const { getTotalDogs, getDogsById} = require('../utils/utils');
 const router = Router();
 
 router.get("/", async (req, res) => {
@@ -18,15 +18,6 @@ router.get("/", async (req, res) => {
     }
 })
 
-
-// router.get("/db", async (req, res) => {
-//     const allDB =await getDogsDB()
-//     try {
-//         res.status(201).json(allDB);
-//     } catch (error) {
-//         res.status(404).send("Error while requesting dogs")
-//     }
-// })
 
 router.get("/:id", async (req, res) => {
     const {id} = req.params;

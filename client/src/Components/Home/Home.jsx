@@ -11,7 +11,6 @@ import { Loading } from '../Loading/Loading';
 export function Home() {
     const dispatch = useDispatch();
     let fullDogs = useSelector(state => state.allDogs);
-    const error = useSelector(state => state.error);
     
     useEffect(() => {
         dispatch(getTemperaments())
@@ -37,11 +36,7 @@ export function Home() {
     }
 
     // -----dogsPerPage
-
-    const backHome = () => {
-        dispatch(clearDogs())
-        dispatch(getAllDogs())
-    }
+      
 
     return (
         <>
@@ -52,14 +47,9 @@ export function Home() {
             </div>
         </div>
         <div className={styles.container}>
-        
-            { error.length === 0 ?
+            { 
                 (fullDogs.length > 0  ? 
-                <CardsHome dogsShown={dogsShown}/> : <Loading/>): 
-                    <div>
-                        <p>{error}</p>
-                        <button onClick={backHome}>GO BACK</button>
-                    </div>
+                <CardsHome dogsShown={dogsShown}/> : <Loading/>)
             }
         </div>
         <div className={styles.pagfoot}>

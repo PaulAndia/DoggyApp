@@ -56,11 +56,13 @@ export function SearchedDogs() {
              {error.length === 0 ?
                 (dogsName.length > 0  ? 
                 <CardsHome dogsShown={dogsShown}/> : <Loading/>): 
-                    <div>
-                        <p>{error}</p>
-                        <Link to = "/home">
-                            <button>GO HOME</button>
-                        </Link>
+                    <div className={styles.contError}>
+                        <div className={styles.notFound}>{error}</div>
+                        <div className={styles.btn}>
+                            <Link to = "/home">
+                                <button>BACK TO HOME</button>
+                            </Link>
+                        </div>
                     </div>
             }
         </div>

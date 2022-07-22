@@ -12,7 +12,6 @@ export const  FILTER_ALPHABET = "FILTER_ALPHABET";
 export const  FILTER_WEIGHT = "FILTER_WEIGHT";
 export const  FILTER_SOURCE = "FILTER_SOURCE";
 export const  FILTER_TEMP = "DOG_TEMP";
-export const  GET_DB = "GET_DB";
 
 
 

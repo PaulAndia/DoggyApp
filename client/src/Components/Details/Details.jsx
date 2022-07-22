@@ -1,11 +1,10 @@
 import React, { useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getDogDetails, clearDetails, clearDogs, clearSearch } from '../../Redux/Actions';
+import { getDogDetails, clearDetails } from '../../Redux/Actions';
 import { useParams } from 'react-router-dom';
 import { Loading } from '../Loading/Loading';
 import { NavBar } from '../NavBar/NavBar';
 import styles from "./Details.module.css"
-
 
 export function Details() {
     const {id} = useParams();
@@ -16,7 +15,6 @@ export function Details() {
         dispatch(getDogDetails(id));
         return () => {
             dispatch(clearDetails())
-           
         }
     }, [dispatch, id])
 
