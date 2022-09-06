@@ -16,7 +16,7 @@ function App() {
         <Route exact path = "/"><Landing/></Route>
         <Route exact path = "/home" ><Home/></Route>
         <Route exact path = "/dogs/:id" ><Details/></Route>
-        <Route exact path = "/dogs" ><SearchedDogs/></Route>
+        <Route exact path = "/dogs/" ><SearchedDogs/></Route>
         <Route exact path = "/temperaments" ><Temperaments/></Route>
         <Route exact path = "/dog" ><Form/></Route>
       </Switch>

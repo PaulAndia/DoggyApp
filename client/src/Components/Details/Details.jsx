@@ -38,7 +38,7 @@ export function Details() {
                     </div>
                     <div className={`${styles.face} ${styles.back}`}>
                             <h3>{d.name.toUpperCase()}</h3>
-                            <p><strong><u>Temperaments:</u></strong> {d.temperaments} Kg.</p>
+                            <p><strong><u>Temperaments:</u></strong> {d.temperaments}</p>
                             <p><strong><u>Weight:</u></strong> {d.weight} Kg.</p>
                             <p><strong><u>Height:</u></strong> {d.height} cm.</p>
                             <p><strong><u>Years:</u></strong> {d.years}</p>
