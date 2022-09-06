@@ -18,11 +18,12 @@ export const  FILTER_TEMP = "DOG_TEMP";
 export const getAllDogs = () => {
     return async function(dispatch){
         try {
-            const response = await axios.get("http://localhost:3001/dogs");
+            const response = await axios.get("/dogs");
             const dogs = response.data; // ---> [{}. {},...]
+            const dogsR = dogs.reverse();
             return dispatch({
                 type: GET_ALL_DOGS,
-                payload: dogs
+                payload: dogsR
             })
         } catch (error) {
             console.log(error);
@@ -35,7 +36,7 @@ export const getAllDogs = () => {
 export const getDogDetails = (id) => {
     return async function(dispatch){
         try {
-            const response = await axios.get(`http://localhost:3001/dogs/${id}`)
+            const response = await axios.get(`/dogs/${id}`)
             const dog = response.data; // --> {}
             return dispatch({
                 type: GET_DOG_DETAILS,
@@ -58,7 +59,7 @@ export const getDogByName = (name) => {
     return async function(dispatch){
         try {
             if(name){
-                const responseName = await axios.get(`http://localhost:3001/dogs?name=${name}`);
+                const responseName = await axios.get(`/dogs?name=${name}`);
                 const dogFound = responseName.data; // --> [{}, {}]
                     return dispatch({
                         type: GET_DOG_NAME,
@@ -84,7 +85,7 @@ export const clearDogs = () => {
 
 export const postDog = (formData) => {
     return async function(dispatch){
-        await axios.post('http://localhost:3001/dog', formData);
+        await axios.post('/dog', formData);
         return dispatch({type: POST_DOG})
     }
 }
@@ -92,7 +93,7 @@ export const postDog = (formData) => {
 export const getTemperaments = () => {
     return async function(dispatch){
         try {
-            const resTemps = await axios.get("http://localhost:3001/temperaments");
+            const resTemps = await axios.get("/temperaments");
             const temps = resTemps.data;
             const orderAsc = (x,y) => {
                 return (x.name.toLowerCase().localeCompare(y.name.toLowerCase()));

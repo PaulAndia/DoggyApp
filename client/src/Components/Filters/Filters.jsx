@@ -71,7 +71,7 @@ export function Filters() {
             </div>
 
             <div className={styles.select}>
-                <p>SELECT :</p>
+                <p>SELECT TEMPERAMENT:</p>
             <select  name="temps" id="Temps Filter" onChange={handleTemps} value={filtersState.filterTemps}>
                 <option value="ALL">All temperaments</option>
                 {tempes?.map(e =>
