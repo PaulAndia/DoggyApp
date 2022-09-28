@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { useHistory, } from 'react-router-dom';
 import styles from "./Search.module.css"
 import {FaSearch} from "react-icons/fa"
+import Swal from 'sweetalert2'; 
 
 export function Search() {
     const [searchName, setSearchName] = useState("");
@@ -13,7 +14,11 @@ export function Search() {
             history.push(`dogs?name=${searchName}`)
             setSearchName("")
         }else{
-            alert("please write a name");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please insert a name!',
+              })
         }
     }
 

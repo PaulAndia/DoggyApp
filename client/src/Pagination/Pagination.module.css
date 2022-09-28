@@ -21,3 +21,26 @@
 .des{
     background-color: green;
 }
+
+.bOn{
+    background-color: transparent;
+    cursor: pointer;
+    border-width: 0px;
+    border-style: solid;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.bOff{
+    background-color: transparent;
+    border-style: solid;
+    border-width: 0px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.cont{
+    display: flex;
+    column-gap: 5px;
+    justify-content: center;
+}

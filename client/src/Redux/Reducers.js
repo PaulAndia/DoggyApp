@@ -3,6 +3,7 @@ import {
     GET_DOG_NAME, MSG_ERROR, CLEAR_DOGS, POST_DOG, GET_TEMPS, CLEAR_SEARCH,
     FILTER_ALPHABET, FILTER_WEIGHT, FILTER_SOURCE, FILTER_TEMP
 } from './Actions';
+import Swal from 'sweetalert2'; 
 
 const initialState = {
     allDogs: [],
@@ -151,7 +152,12 @@ const rootReducer = (state=initialState, action) =>{
                     return filteredSource.length === 0 ? {
                         ...state,
                         dogsName: [...state.dogsName],
-                        errorDB: window.alert("No Dog Found in DB"),
+                        // errorDB: window.alert("No Dog Found in DB"),
+                        errorDB:   Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'No dog has been created',
+                          })
                     } : {
                         ...state,
                         dogsName: filteredSource,
@@ -188,7 +194,12 @@ const rootReducer = (state=initialState, action) =>{
             return filteredSource.length === 0 ? {
                 ...state,
                 allDogs: [...state.allDogs],
-                errorDB: window.alert("No dogFound in DB"),
+                // errorDB: window.alert("No dogFound in DB"),
+                errorDB:   Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No dog has been created',
+                  })
             } : {
                 ...state,
                 allDogs: filteredSource,
